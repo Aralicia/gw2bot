@@ -1,0 +1,5 @@
+#Use npm install to get the dependencies.
+node_modules
+
+#configuration for the bot
+config.json
