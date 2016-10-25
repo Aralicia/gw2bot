@@ -30,7 +30,7 @@ var bot = new Eris(config.discord_token, {
 
 bot.on('messageCreate', (msg) => {
   if (msg.author.bot || !msg.channel.guild) return
-  if (msg.content !== '?' && msg.content[0] === '?') {
+  if (msg.content.length > 1 && config.command_identifiers.indexOf(msg.content[0]) != -1) {
     var splitIdx = msg.content.substring(1).indexOf(' ')
     var cmdInput = ''
     var cmdArgs = ''
