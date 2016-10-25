@@ -1,6 +1,7 @@
 {
   "discord_token" : "token",
   "bot_owner" : "owner id (temporary)",
+  "command_identifiers" : "!?",
   "keys" : {
     "gw2_token" : "gw2 api key (temporary)"
   }
