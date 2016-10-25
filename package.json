@@ -9,6 +9,8 @@
   "author": "TriggerRimfire",
   "license": "MIT",
   "dependencies": {
-    "eris": "github:abalabahaha/eris#dev"
+    "eris": "github:abalabahaha/eris#dev",
+    "request": "^2.76.0",
+    "request-promise": "^4.1.1"
   }
 }
