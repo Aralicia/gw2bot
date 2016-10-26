@@ -1,6 +1,11 @@
 {
   "discord_token" : "token",
+  "shardCount" : 1,
+  "cyclePlaying" : true,
+  "playingStatus" : "dnd",
+  "playing" : ["this", "that", "foo", "bar"],
   "bot_owner" : "owner id (temporary)",
+  "command_identifiers" : ["!", "?"],
   "keys" : {
     "gw2_token" : "gw2 api key (temporary)"
   }
