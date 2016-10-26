@@ -1,17 +1,17 @@
 try {
-  const Eris = require('eris')
+  var Eris = require('eris')
 } catch (e) {
   console.log(e.stack)
   console.log('Error: Could not load Eris.')
 }
 try {
-  const config = require('./config.json')
+  var config = require('./config.json')
 } catch (e) {
   console.log(e.stack)
   console.log('Error: Could not load config.')
 }
 try {
-  const gw2 = require('./lib/GW2.js')
+  var gw2 = require('./lib/GW2.js')
 } catch (e) {
   console.log(e.stack)
   console.log('Error: Could not load GW2.')
@@ -25,14 +25,15 @@ bot.commands = {}
 
 bot.on('messageCreate', (msg) => {
   if (msg.author.bot || !msg.channel.guild) return
-    if(config.command_identifiers.indexOf(msg.content[0]) != -1) {
-      const cmd = msg.content.substring(msg.content.indexOf(' ') + 1)
-      msg.content = message.content.replace('?', '').trim();
-        require('./lib/commandLoader.js');
-        if(cmd in bot.commands) {
-          bot.commands[cmd].execute(message);
-        }
+  if(config.command_identifiers.indexOf(msg.content[0]) != -1) {
+    const sep = msg.content.indexOf(' ')
+    const cmd = ( sep != -1 ? msg.content.substring(1, sep) : msg.content.substring(1) )
+    msg.content = msg.content.replace('?', '').trim();
+    require('./lib/commandLoader.js')(bot)
+    if(cmd in bot.commands) {
+      bot.commands[cmd].execute(msg, bot);
     }
+  }
 })
 
 bot.on('ready', () => {
@@ -46,10 +47,10 @@ bot.on('ready', () => {
 })
 
 bot.on('shardResume', shard => {
-  console.log("Shard #"{shard}" has reconnected!")
+  console.log("Shard #"+shard+" has reconnected!")
 })
 bot.on('shardDisconnect', (error, shard) => {
-  console.log("Shard #"{shard}" has disconnected!")
+  console.log("Shard #"+shard+" has disconnected!")
   console.log(error)
 })
 setInterval(() => {
@@ -63,9 +64,8 @@ setInterval(() => {
 
 process.on('SIGINT', () => {
   console.log('Interrupted, disconnecting!')
-  bot.disconnect().then(() => {
-    process.exit(0)
-  })
+  bot.disconnect()
+  process.exit(0)
 })
 
 bot.connect().then(console.log("Logged in"))
